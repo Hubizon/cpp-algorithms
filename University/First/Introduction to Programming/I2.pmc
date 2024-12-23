@@ -1,0 +1,54 @@
+// Hubert Jastrzębski | Satori I2 (Przykładowa maszyna cyfrowa - Różnica ciągów uporządkowanych) | 2024-11-09
+// https://satori.tcs.uj.edu.pl/contest/9410000/problems/9422567
+
+50
+0: LOAD . 0
+1: STORE . 79     // 79: wynik
+2: LOAD . 81
+3: STORE . 70     // 70: i: adres A[i] (na poczatku 81)
+4: LOAD . 80
+5: ADD @ 80
+6: STORE . 71     // 71: adres konca A, czyli 80 + n
+7: ADD . 1
+8: STORE . 72     // 72: j: adres B[j] (na poczatku 80 + n + 1)
+9: ADD @ 80
+10: SUB . 1
+11: STORE . 73    // 73: adres konca B, czyli 80 + 2n
+12: 0
+13: LOAD @ 71
+14: SUB @ 70
+15: JNEG . 45     // jezeli i > n: koniec
+16: LOAD @ 73
+17: SUB @ 72
+18: JNEG . 45     // jezeli j > n: koniec
+19: LOAD * 70
+20: SUB * 72
+21: 0
+22: JNEG . 29     // jezeli A[i] < B[j]
+23: JZERO . 34    // jezeli A[i] == B[j]
+24: 0             // jezeli A[i] > B[j], to:
+25: LOAD @ 72
+26: ADD . 1
+27: STORE . 72    // j = j + 1
+28: JUMP . 12
+29: 0             // jezeli A[i] < B[j], to:
+30: LOAD @ 70
+31: ADD . 1
+32: STORE . 70    // i = i + 1
+33: JUMP . 12
+34: 0             // jezeli A[i] == B[j], to:
+35: LOAD @ 72
+36: ADD . 1
+37: STORE . 72    // j = j + 1
+38: LOAD @ 70
+39: ADD . 1
+40: STORE . 70    // i = i + 1
+41: LOAD @ 79
+42: ADD . 1
+43: STORE . 79    // wynik = wynik + 1
+44: JUMP . 12
+45: 0
+46: LOAD @ 80
+47: SUB @ 79
+48: STORE . 79    // res = n - res
+49: STOP . 0

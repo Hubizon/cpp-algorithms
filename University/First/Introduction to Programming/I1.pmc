@@ -1,0 +1,24 @@
+// Hubert Jastrzębski | Satori I1 (Przykładowa maszyna cyfrowa - Pierwiastek) | 2024-11-08
+// https://satori.tcs.uj.edu.pl/contest/9410000/problems/9422551
+
+20
+0: LOAD . 0
+1: STORE . 98     // 98 - indeks i
+2: STORE . 99     // 99 - i^2
+3: 0
+4: LOAD @ 100
+5: SUB @ 99
+6: JNEG . 16     // jesli a < i^2: koniec
+7: LOAD @ 98
+8: ADD . 1
+9: STORE . 98     // i = i + 1
+10: ADD @ 98
+11: SUB . 1
+12: ADD @ 99
+13: STORE . 99     // i^2 = (i + 1) + (i + 1) - 1 + i^2 = (i + 1)^2
+14: JUMP . 4
+15: 0
+16: LOAD @ 98
+17: SUB . 1
+18: STORE . 101
+19: STOP . 0

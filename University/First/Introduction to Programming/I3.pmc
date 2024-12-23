@@ -1,0 +1,66 @@
+// Hubert Jastrzębski | Satori I3 (Przykładowa maszyna cyfrowa - NWW) | 2024-11-09
+// https://satori.tcs.uj.edu.pl/contest/9410000/problems/9422583
+
+62
+0: LOAD @ 100      // [100]: a
+1: STORE . 90      // [90]: x = a
+2: LOAD @ 101      // [101]: b
+3: STORE . 91      // [91]: y = b
+4: 0               // mnozenie:
+5: LOAD @ 91
+6: SUB . 1
+7: STORE . 91      // y = y - 1
+8: JZERO . 14      // jezeli y == 0: koniec
+9: 0               // jezeli y > 0, to:
+10: LOAD @ 90
+11: ADD @ 100
+12: STORE . 90     // x = x + a
+13: JUMP . 4
+14: 0              // zapis wyniku mnozenia:
+15: LOAD @ 90
+16: STORE . 103    // [103]: a * b
+17: 0              // nwd(a, b):
+18: LOAD @ 100
+19: STORE . 90     // [90]: x = a
+20: LOAD @ 101
+21: STORE . 91     // [91]: y = b
+22: 0              // liczenie nwd:
+23: LOAD @ 90
+24: SUB @ 91
+25: JNEG . 32      // jezeli x < y
+26: JZERO . 37     // jezeli x == y
+27: 0              // jezeli x > y, to:
+28: LOAD @ 90
+29: SUB @ 91
+30: STORE . 90     // x = x - y
+31: JUMP . 22
+32: 0              // jezeli x < y, to:
+33: LOAD @ 91
+34: SUB @ 90
+35: STORE . 91     // y = y - x
+36: JUMP . 22
+37: 0              // jezeli x = y, to:
+38: LOAD @ 90
+39: STORE . 102
+40: 0              // liczenie (a * b) / gcd(a, b) = [103] / [102]
+41: LOAD . 0
+42: STORE . 104    // [104]: wynik = 0
+43: STORE . 92     // [92]: temp = 0
+44: LOAD @ 103
+45: STORE . 90     // [90]: x = a * b
+46: LOAD @ 102
+47: STORE . 91     // [91]: y = gcd(a, b)
+48: 0              // liczenie dzielenia:
+49: LOAD @ 92
+50: SUB @ 90
+51: JZERO . 60     // jezeli temp == x: koniec
+52: 0              // jezeli temp != x, to:
+53: LOAD @ 92
+54: ADD @ 91
+55: STORE . 92     // temp = temp + y
+56: LOAD @ 104
+57: ADD . 1
+58: STORE . 104    // wynik = wynik + 1
+59: JUMP . 48
+60: 0
+61: STOP . 0

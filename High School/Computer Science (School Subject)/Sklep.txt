@@ -1,0 +1,13 @@
+kwerenda 1:
+SELECT `nazwa` FROM `towary` WHERE 1;
+
+kwerenda 2:
+SELECT `cena` FROM `towary` WHERE nazwa="Cienkopis";
+
+kwerenda 3:
+SELECT dostawcy.nazwa, count(*) ilosc FROM dostawcy
+JOIN towary ON dostawcy.id = towary.idDostawcy 
+GROUP BY dostawcy.nazwa
+
+kwerenda 4:
+ALTER TABLE dostawcy ADD e_mail TEXT;
